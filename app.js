@@ -15,12 +15,16 @@ var dotenv = require('dotenv');
 dotenv.config();
 const mongoose = require('mongoose');
 const makCon = async () => {
-  await mongoose.connect(process.env.DB_CONNECT, {
+  return  await mongoose.connect(process.env.DB_CONNECT, {
   useNewUrlParser: true,
   useUnifiedTopology: true
   });
 };
-makCon();
+makCon().then((resp) => {
+  console.log('database response', resp);
+}, (error) => {
+  console.log('database error', error);
+});
 
 
 // ****************
